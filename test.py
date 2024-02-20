@@ -49,7 +49,7 @@ def main():
 
     if uploaded_file is not None:
         st.write("File uploaded successfully!")
-        FileHandler.save_uploaded_file(uploaded_file, os.path.join(r"C:\Users\kisha\Projects\Sentimental Analysis", "new.wav"))
+        FileHandler.save_uploaded_file(uploaded_file, os.path.join( "new.wav"))
         st.success("File saved successfully!")
 
         recognizer = sr.Recognizer()
