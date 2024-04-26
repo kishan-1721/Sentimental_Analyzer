@@ -44,7 +44,7 @@ class FileHandler:
 def main():
     st.title('Sentimental Analyzer')
 
-    uploaded_file = st.file_uploader("Upload a file", type=['mp3', 'wav'])
+    uploaded_file = st.file_uploader("Upload a file", type=['wav'])
     input_sms = st.text_input("Enter the Message")
 
     if uploaded_file is not None:
@@ -68,14 +68,30 @@ def main():
 
         st.write(input_sms)
 
+    # if st.button('Predict'):
+    #     if input_sms == "" and uploaded_file is None:
+    #         st.header('Please Enter Your Message !!!')
+    #     else:
+    #         text_processor = TextProcessor()
+    #         input_sms = text_processor.clean_text(input_sms)
+    #         sentiment = SentimentAnalyzer.generate_polarity(input_sms)
+    #         st.header(sentiment[0])
+
     if st.button('Predict'):
-        if input_sms == "" and uploaded_file is None:
-            st.header('Please Enter Your Message !!!')
-        else:
-            text_processor = TextProcessor()
-            input_sms = text_processor.clean_text(input_sms)
-            sentiment = SentimentAnalyzer.generate_polarity(input_sms)
-            st.header(sentiment[0])
+            if input_sms == "" and uploaded_file is None:
+                st.header('Please Enter Your Message !!!')
+            else:
+                text_processor = TextProcessor()
+                input_sms = text_processor.clean_text(input_sms)
+                sentiment = SentimentAnalyzer.generate_polarity(input_sms)
+                st.header(sentiment[0])
+    
+                if sentiment[0] > 0.00:
+                    st.header("Positive Sentiment")
+                elif sentiment[0] < 0.00:
+                    st.header("Negative Sentiment")
+                else:
+                    st.header("Neutral Sentiment")
 
 if __name__ == "__main__":
     main()
